@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   //Criando objetos
-    Usuario usuario = Usuario(
+  /*  Usuario usuario = Usuario(
       codigo: 1,
         senha: "ify",
         login: 'SamAntunes',
@@ -34,30 +34,30 @@ class MyApp extends StatelessWidget {
       tipoCulinaria: tipo
     );
 
-
+*/
     return MaterialApp(
-       // debugShowCheckedModeBanner: false,
-        //home: TelaLogin(),
-        home: Scaffold(
-          appBar: AppBar(
-              title: const Text("Restaurante"),
-          ),
-          body: Center(
-            child: Padding(padding: const EdgeInsets.all(18.0),
-              child: Column(
-                children: [
-                  Text("Nome Restaurante: ${restaurante.nomeRestaurante}"),
-                  Text("Código: ${restaurante.codigo}"),
-                  Text("Localização: ${restaurante.latitude} ${restaurante.longitude}"),
-                  Text("Nome do proprietário: ${restaurante.proprietario}"),
-                  Text("Tipo de Culinária: ${restaurante.tipoCulinaria}"),
-                  Text(""),
-                ],
-              ),
-            ),
-          )
-            
-      )
+       debugShowCheckedModeBanner: false,
+       home: TelaLogin(),
+       // home: Scaffold(
+        //  appBar: AppBar(
+         //     title: const Text("Restaurante"),
+        //  ),
+       //   body: Center(
+       //     child: Padding(padding: const EdgeInsets.all(18.0),
+        //      child: Column(
+         //       children: [
+         //         Text("Nome Restaurante: ${restaurante.nomeRestaurante}"),
+          //        Text("Código: ${restaurante.codigo}"),
+            //      Text("Localização: ${restaurante.latitude} ${restaurante.longitude}"),
+           //       Text("Nome do proprietário: ${restaurante.proprietario}"),
+          //        Text("Tipo de Culinária: ${restaurante.tipoCulinaria}"),
+           //       Text(""),
+             //   ],
+         //     ),
+         //   ),
+       //   )
+      //
+   //   ),
     );
 
   }
