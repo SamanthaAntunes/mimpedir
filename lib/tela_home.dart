@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mimpedir/tela_cad_restaurante.dart';
+import 'package:mimpedir/Tela_edi_restaurante.dart';
 
 class TelaHome extends StatelessWidget{
   TelaHome({super.key});
@@ -16,6 +17,7 @@ class TelaHome extends StatelessWidget{
           ElevatedButton(onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => TelaCadRestaurante()));
           }, child: Text("Cadastrar Restaurantes")),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children:
@@ -29,7 +31,9 @@ class TelaHome extends StatelessWidget{
               SizedBox(width: 10),
               ElevatedButton(onPressed: (){}, child: Text("Excluir")),
               SizedBox(width: 10),
-              ElevatedButton(onPressed: (){}, child: Text("Editar")),
+              ElevatedButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TelaEdiRestaurante()));
+              }, child: Text("Editar")),
            ],
           ),
         ],

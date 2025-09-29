@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class TelaCadRestaurante extends StatelessWidget{
   TelaCadRestaurante({super.key});
 
@@ -25,14 +26,14 @@ class TelaCadRestaurante extends StatelessWidget{
               decoration: const InputDecoration(hintText: 'Nome do Restaurante'),
               validator: (String? value) {},
             ),
-        TextFormField(
-          decoration: const InputDecoration(hintText: 'Latitude'),
-          validator: (String? value) {},
-        ),
-        TextFormField(
-          decoration: const InputDecoration(hintText: 'Longitude'),
-          validator: (String? value) {},
-        ),
+            TextFormField(
+              decoration: const InputDecoration(hintText: 'Latitude'),
+              validator: (String? value) {},
+            ),
+            TextFormField(
+              decoration: const InputDecoration(hintText: 'Longitude'),
+              validator: (String? value) {},
+            ),
             SizedBox(height: 50),
             ElevatedButton(onPressed: (){}, child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -40,7 +41,8 @@ class TelaCadRestaurante extends StatelessWidget{
                 Icon(Icons.save),
                 Text("Cadastrar")
               ],
-            ))
+            ),
+            ),
           ],
         ),
       ),
