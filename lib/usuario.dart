@@ -31,4 +31,12 @@ class Usuario{
   set nome(String? nome) => _nome = nome;
   set senha(String? senha) => _senha = senha;
   set codigo(int? codigo) => _codigo = codigo;
+
+  String logar(String nomeDigitado, String senhaDigitada){
+    if (nomeDigitado == nome && senhaDigitada == senha) {
+      return "Login realizado com sucesso!";
+    }else{
+      return "Falha no login: usuário ou senha incorretos.";
+    }
+  }
 }
