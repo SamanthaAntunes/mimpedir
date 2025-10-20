@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:mimpedir/restaurante.dart';
+import 'package:mimpedir/tipo.dart';
+import 'package:mimpedir/banco/restaurante_DAO.dart';
+import 'package:mimpedir/banco/tipo_DAO.dart';
 
 class TelaEdiRestaurante extends StatelessWidget{
+  //restaurante que será exibido na tela
+  static Restaurante restaurante = Restaurante();
+
   TelaEdiRestaurante({super.key});
 
   @override
@@ -43,7 +50,7 @@ class TelaEdiRestaurante extends StatelessWidget{
            mainAxisAlignment: MainAxisAlignment.center,
            children: [
              Icon(Icons.save),
-             Text("Editar")
+             Text("Salvar")
           ],
         ),
       ),

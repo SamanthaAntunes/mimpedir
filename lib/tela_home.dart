@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mimpedir/banco/restaurante_DAO.dart';
 import 'package:mimpedir/tela_cad_restaurante.dart';
 import 'package:mimpedir/Tela_edi_restaurante.dart';
 
@@ -31,15 +32,47 @@ class TelaHome extends StatelessWidget{
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => TelaCadRestaurante()));
-                  }, icon: Icon(Icons.edit, color: Colors.blue,)),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.delete, color: Colors.red)),
+                  IconButton(
+                    icon: Icon(Icons.edit, color: Colors.blue),
+                    onPressed: () {
+                      //botão editar
+                      TelaEdiRestaurante.restaurante = r;
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => TelaEdiRestaurante()));
+                  },
+                  ),
+
+                  IconButton(
+                      icon: Icon(Icons.delete, color: Colors.red),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: Text('ATENÇÃO!'),
+                              content: Text('Confirmar exclusão?'),
+                              actions: [
+                                TextButton(onPressed: (){
+                                  Navigator.pop(context);
+                                }, child: Text('cancelar')),
+                                TextButton(onPressed: (){
+                                  //aqui foi confirmado, pode excluir
+                                  RestauranteDAO.excluir(r);
+                                  setState(() {
+                                    carregarRestaurantes();
+                                  });
+                                  //fecha o alerte
+                                  Navigator.pop(context);
+                                }, child: Text('sim'))
+                              ],
+                            )
+                        );
+                      }
+
+                  ),
                 ],
               ),
             ),
           );
-        }
+        },
         ),
       ),
       floatingActionButton: FloatingActionButton(
