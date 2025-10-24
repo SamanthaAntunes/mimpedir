@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mimpedir/banco/restaurante_DAO.dart';
 import 'package:mimpedir/restaurante.dart';
+import 'package:mimpedir/tela_home.dart';
 import 'package:mimpedir/tipo.dart';
+import 'package:mimpedir/banco/tipo_DAO.dart';
 
 
 class TelaCadRestaurante extends StatefulWidget {
-  TelaCadRestaurante({super.key});
+ const TelaCadRestaurante({super.key});
+
+ static Restaurante restaurante = Restaurante();
 
   @override
   State<StatefulWidget> createState() {
@@ -15,13 +19,27 @@ class TelaCadRestaurante extends StatefulWidget {
 class TelaCadRestauranteState extends State<TelaCadRestaurante>{
 
   String? culinariaSelecionada;
-
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController latitudeController = TextEditingController();
   final TextEditingController longitudeController = TextEditingController();
-
   List<Tipo> tiposCulinaria = [];
   int? tipoCulinaria;
+
+  void initState() {
+    super.initState();
+    carregarTipos();
+
+    tipoCulinaria = TelaCadRestaurante.restaurante.tipoCulinaria?.codigo!;
+    culinariaSelecionada = TelaCadRestaurante.restaurante.tipoCulinaria?.nome!;
+  }
+
+  Future<void> carregarTipos() async {
+    final lista = await TipoDAO.listarTipos();
+    setState(() {
+      tiposCulinaria = lista;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +52,8 @@ class TelaCadRestauranteState extends State<TelaCadRestaurante>{
             Text("Informações de Restaurante: "),
             SizedBox(height: 40),
             Text("Tipo de comida: "),
-            DropdownButtonFormField<String>(
-              value: culinariaSelecionada,
-              items: tiposCulinaria.map((tipo) {
-                return DropdownMenuItem<String>(
-                  value: tipo.nome,
-                  child: Text("${tipo.nome}"),
+            DropdownButtonFormField<String>(value: culinariaSelecionada, items: tiposCulinaria.map((tipo) {
+                return DropdownMenuItem<String>(value: tipo.nome, child: Text("${tipo.nome}"),
                 );
               }).toList(),
 
@@ -52,7 +66,7 @@ class TelaCadRestauranteState extends State<TelaCadRestaurante>{
                   tipoCulinaria = tipoSelecionado.codigo;
                 });
                 },
-              ),
+            ),
             TextFormField(
               decoration: const InputDecoration(hintText: 'Nome do Restaurante'),
               validator: (String? value) {},
@@ -75,13 +89,20 @@ class TelaCadRestauranteState extends State<TelaCadRestaurante>{
                   final sucesso = await RestauranteDAO.cadastrarRestaurante(nomeController.text,
                       latitudeController.text, longitudeController.text, tipoCulinaria);
 
-                  String mensagem = 'ERRO: Não foi possível cadastrar o restaurante. Verifique os dados.';
-                  Color corFundo = Colors.red;
+                  String mensagem;
+                  Color corFundo;
 
                   if(sucesso > 0){
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TelaHome())
+                    );
                     // Sucesso: ID retornado é maior que 0
                     mensagem = '"${nomeController.text}" cadastrado com sucesso! ID: $sucesso';
                     corFundo = Colors.green;
+                  }
+                  else{
+                    mensagem = 'ERRO: Não foi possível cadastrar o restaurante. Verifique os dados.';
+                    corFundo = Colors.red;
                   }
 
                   ScaffoldMessenger.of(context).showSnackBar(

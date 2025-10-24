@@ -1,6 +1,7 @@
 import 'package:mimpedir/banco/database_helper.dart';
 import 'package:mimpedir/tipo.dart';
 
+
 class TipoDAO{
 
   static Future<Tipo> listar(int? id) async{

@@ -4,6 +4,7 @@ import 'usuario.dart';
 import 'tipo.dart';
 import 'restaurante.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -28,8 +29,8 @@ class MyApp extends StatelessWidget {
     Restaurante restaurante = Restaurante(
       codigo: 1,
       nomeRestaurante: "La Bella Massa",
-      latitude: 45,
-      longitude: 15,
+      latitude: '23',
+      longitude: '15',
       proprietario: Usuario(),
       tipoCulinaria: Tipo()
     );

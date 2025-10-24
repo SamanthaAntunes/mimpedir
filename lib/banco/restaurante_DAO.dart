@@ -5,8 +5,7 @@ import 'package:mimpedir/restaurante.dart';
 import 'package:mimpedir/tipo.dart';
 
 class RestauranteDAO {
-  static Future<void> atualizar(int? cd, String? nome, String? lat,
-      String? long, int? tipo) async {
+  static Future<void> atualizar(int? cd, String? nome, String? lat, String? long, int? tipo) async {
     final db = await DatabaseHelper.getDatabase();
     final resultado = await db.update('tb_restaurante', {
       'nm_restaurante': nome,
@@ -30,8 +29,7 @@ class RestauranteDAO {
         nomeRestaurante: resultado.first['nm_restaurante'] as String,
         latitude: resultado.first['latitude_restaurante'] as String,
         longitude: resultado.first['longitude_restaurante'] as String,
-        tipoCulinaria: await TipoDAO.listar(
-            resultado.first['cd_tipo'] as int) as Tipo
+        tipoCulinaria: await TipoDAO.listar(resultado.first['cd_tipo'] as int) as Tipo
     );
   }
 
@@ -82,10 +80,10 @@ class RestauranteDAO {
       'longitude_restaurante': longitude,
     };
     try {
-      final idRestaurante = await db.insert('tb_resstaurante', dadosRestaurante);
+      final idRestaurante = await db.insert('tb_restaurante', dadosRestaurante);
       return idRestaurante;
     } catch (e) {
-      print("Erro ao cadastrar restaurante: $e");
+          print("Erro ao cadastrar restaurante: $e");
       return -1;
     }
   }
